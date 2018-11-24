@@ -4,6 +4,7 @@ import os
 import random
 import time
 import argparse
+import time
 
 class Board :
     def __init__(self, board) :
@@ -61,7 +62,6 @@ class Board :
             self.board[row][column] = random.sample(self.possibilities(row, column), 1)[0]
             self.element_generator(indice+1)
 
-
 if __name__ == '__main__' :
     parser = argparse.ArgumentParser(description='Generate random sudokus')
     parser.add_argument('-s', dest='seed', default=None, help='a string seed')
@@ -74,10 +74,12 @@ if __name__ == '__main__' :
 
     grille = np.zeros((9, 9), dtype=int)
     while True :
-        try :
-            board = Board(grille.copy())
-            board.element_generator(0)
-            board.print()
-            break
-        except :
-            pass
+        while True :
+            try :
+                board = Board(grille.copy())
+                board.element_generator(0)
+                board.print()
+                break
+            except :
+                pass
+        time.sleep(2)
